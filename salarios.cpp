@@ -97,13 +97,13 @@ void Salarios::on_actionGuardar_triggered()
     // Abrir un cuadro de diálogo para seleccionar el path y archivo a guardar
     QString nombreArchivo = QFileDialog::getSaveFileName(this,
                                                    "Guardar calculos de salarios",
-                                                   QDir::home().absolutePath() + "/salarios.txt",
-                                                   "Archivos de texto (*.txt)");
+                                                   QDir::home().absolutePath() + "/salarios.sal",
+                                                   "Archivos de texto (*.sal)");
     // Crear un objeto File
     QFile archivo(nombreArchivo);
-    // Tartar de abrir para escritura
+    // Tratar de abrir para escritura
     if(archivo.open(QFile::WriteOnly | QFile::Truncate)){
-        // cRear un objeto 'stream' de texto
+        // Crear un objeto 'stream' de texto
         QTextStream salida(&archivo);
         // Enviar los datos del resultado a la salida
         salida << ui->outCalculos->toPlainText();
@@ -132,6 +132,11 @@ void Salarios::on_actionAcerca_de_triggered()
     dialog->exec();
     // Luego de cerrar la ventana, se acceden a los datos de la misma
     qDebug() << dialog->valor();
+
+}
+
+void Salarios::on_actionAbrir_triggered()
+{
 
 }
 
