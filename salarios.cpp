@@ -138,5 +138,22 @@ void Salarios::on_actionAcerca_de_triggered()
 void Salarios::on_actionAbrir_triggered()
 {
 
-}
+    QDir directorio = QDir::home();
+    QString pathArchivo = directorio.absolutePath();
+    QString file = QFileDialog::getOpenFileName(this,
+                                                "Abrir", pathArchivo, "Archivo de texto(*.sal)");
+    QFile f(file);
+    QTextStream in(&f);
+    QString informacion;
+    if(!f.open(QIODevice::ReadOnly))
+        QMessageBox::warning(this,
+                             "Salarios", "No se puede abrir el archivo");
+
+    while(!in.atEnd()){
+        informacion = informacion + in.readLine() + "\n";
+    }
+    f.close();
+    ui->outCalculos->appendPlainText(informacion);
+    }
+
 
